@@ -13,24 +13,24 @@ app.use(express.static('build'))
 
 let persons = [
   {
-    "name": "Arto Hellas",
-    "number": "040-123456",
-    "id": 1
+    'name': 'Arto Hellas',
+    'number': '040-123456',
+    'id': 1
   },
   {
-    "name": "Martti Tienari",
-    "number": "040-123456",
-    "id": 2
+    'name': 'Martti Tienari',
+    'number': '040-123456',
+    'id': 2
   },
   {
-    "name": "Arto Järvinen",
-    "number": "040-123456",
-    "id": 3
+    'name': 'Arto Järvinen',
+    'number': '040-123456',
+    'id': 3
   },
   {
-    "name": "Lea Kutvonen",
-    "number": "040-123456",
-    "id": 4
+    'name': 'Lea Kutvonen',
+    'number': '040-123456',
+    'id': 4
   }
 ]
 
@@ -65,7 +65,7 @@ app.post('/api/persons', (req, res) => {
   } else if (!body.name) {
     return res.status(400).end('error: name is missing')
   } else if (persons.find(x => x.name === body.name)) {
-      return res.status(400).end('error: name must be unique')
+    return res.status(400).end('error: name must be unique')
   }
 
   const person = {
