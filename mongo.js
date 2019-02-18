@@ -1,40 +1,39 @@
 const mongoose = require('mongoose')
 
-if ( process.argv.length<3 ) {
+if (process.argv.length < 3) {
   console.log('give password as argument')
   process.exit(1)
 }
 
 const password = process.argv[2]
 
+
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-x5ur8.mongodb.net/FullStackViikko3?retryWrites=true`
 
+console.log(url)
+
 mongoose.connect(url, { useNewUrlParser: true })
 
-const personSchema = new mongoose.Schema({
+const Person = mongoose.model('Person', {
   name: String,
-  number: String
+  number: String,
 })
 
-const Person = mongoose.model('Person', personSchema)
-
 if (process.argv.length === 3) {
-  Person.find({})
-    .then(result => {
-      console.log('Puhelinluettelo: ')
-      result.forEach(person => {
-        console.log(person.name, person.number)
-      })
-      mongoose.connection.close()
+  Person.find({}).then(result => {
+    console.log('puhelinluettelo:')
+    result.forEach(person => {
+      console.log(person.name, person.number)
     })
-} else {
-  const person = new Person({
-    name: process.argv[3],
-    number: process.argv[4]
+    mongoose.connection.close()
   })
+} else {
+  const name = process.argv[3]
+  const number = process.argv[4]
+  const person = new Person({ name, number })
   person.save().then(response => {
-    console.log(`Lisätään ${person.name} numero ${person.number} luetteloon.`)
+    console.log(`lisätään ${name} numero ${number} luetteloon`)
     mongoose.connection.close()
   })
 }
