@@ -1,12 +1,15 @@
 module.exports = {
     "env": {
-        "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 2018
     },
+    "plugins": [
+      "react-hooks"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -32,6 +35,7 @@ module.exports = {
         "arrow-spacing": [
           "error", { "before": true, "after": true }
         ],
+        "react-hooks/rules-of-hooks": "error",
         "no-console": 0
     }
 };
